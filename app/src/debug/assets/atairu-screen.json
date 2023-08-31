@@ -1,0 +1,21 @@
+{
+  "items": [
+    {
+      "items": [
+        {
+          "size": "REGULAR",
+          "color": null,
+          "value": "teste",
+          "type": "Text"
+        }
+      ],
+      "type": "Card",
+      "background": {
+        "alpha": 52,
+        "color": "#1f7572",
+        "type": "HexColor"
+      }
+    }
+  ],
+  "type": "Screen"
+}
