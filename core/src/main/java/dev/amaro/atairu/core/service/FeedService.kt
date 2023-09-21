@@ -8,19 +8,17 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
 interface FeedService {
-    suspend fun getScreen(): Screen
+    suspend fun getScreen(screenId: String): Screen
 }
 
-class AtairuServerFeedService() : FeedService {
+class AtairuServerFeedService(private val serviceAddress: String) : FeedService {
     private val jsonEngine = Json {
         ignoreUnknownKeys = true
         isLenient = true
     }
-
     private val client = HttpClient()
-    override suspend fun getScreen(): Screen {
-        val response =
-            client.get("https://atairu-7jyxifti8-amaro-dev.vercel.app/api/mobile").bodyAsText()
+    override suspend fun getScreen(screenId: String): Screen {
+        val response = client.get(serviceAddress).bodyAsText()
         return jsonEngine.decodeFromString(response)
     }
 }
