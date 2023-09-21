@@ -1,18 +1,6 @@
 apply plugin: "maven-publish"
 apply plugin: 'signing'
 
-ext.developer = new Properties()
-ext.developer.id = project.findProperty("dev.id")
-ext.developer.name = project.findProperty("dev.name")
-ext.developer.email = project.findProperty("dev.email")
-ext.pack = new Properties()
-ext.pack.scm = project.findProperty("pom.scm")
-ext.pack.group = project.findProperty("pom.group")
-ext.pack.artifact = project.findProperty("pom.artifact")
-ext.pack.version = project.findProperty("pom.version")
-ext.pack.description = project.findProperty("pom.description")
-ext.pack.name = project.findProperty("pom.name")
-
 def file = file("$projectDir/local.properties")
 if (file.exists()) {
     file.withReader {

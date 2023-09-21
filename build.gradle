@@ -9,6 +9,17 @@ buildscript {
             props.load(it)
         }
     }
+    ext.developer = new Properties()
+    ext.developer.id = project.findProperty("dev.id")
+    ext.developer.name = project.findProperty("dev.name")
+    ext.developer.email = project.findProperty("dev.email")
+    ext.pack = new Properties()
+    ext.pack.scm = project.findProperty("pom.scm")
+    ext.pack.group = project.findProperty("pom.group")
+    ext.pack.artifact = project.findProperty("pom.artifact")
+    ext.pack.version = project.findProperty("pom.version")
+    ext.pack.description = project.findProperty("pom.description")
+    ext.pack.name = project.findProperty("pom.name")
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
     id 'com.android.application' version '7.4.2' apply false
