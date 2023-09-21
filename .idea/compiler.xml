@@ -2,6 +2,8 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.8">
+      <module name="Atairu_SDK.app" target="17" />
+      <module name="Atairu_SDK.compose-ui" target="17" />
       <module name="Project_Mosaic.app" target="17" />
       <module name="Project_Mosaic.compose-ui" target="17" />
     </bytecodeTargetLevel>

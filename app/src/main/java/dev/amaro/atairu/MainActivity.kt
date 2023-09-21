@@ -10,20 +10,21 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import dev.amaro.atairu.service.AtairuFeedService
-import dev.amaro.atairu.service.Screen
-import dev.amaro.atairu.translators.AtairuScreen
+import dev.amaro.atairu.core.models.Screen
+import dev.amaro.atairu.core.service.AtairuServerFeedService
+import dev.amaro.atairu.core.service.FeedService
+import dev.amaro.atairu.ui.compose.elements.AtairuScreen
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
 class MainActivity : ComponentActivity() {
 
-    private lateinit var service: AtairuFeedService
+    private lateinit var service: FeedService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        service = AtairuFeedService(assets)
+        service = AtairuServerFeedService()
         setContent {
             val feedContent = remember { mutableStateOf(null as Screen?) }
             Column {
@@ -33,14 +34,14 @@ class MainActivity : ComponentActivity() {
                 LaunchedEffect("Loading") {
                     refresh(feedContent)
                 }
-                feedContent.value?.apply { AtairuScreen(this).Render() }
+                feedContent.value?.apply { AtairuScreen(this) }
             }
         }
     }
 
     private fun refresh(state: MutableState<Screen?>) {
         GlobalScope.launch {
-            state.value = service.getFeed()
+            state.value = service.getScreen()
         }
     }
 }

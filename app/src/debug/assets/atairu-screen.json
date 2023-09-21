@@ -3,19 +3,29 @@
     {
       "items": [
         {
+          "size": "LARGE",
+          "color": {
+            "alpha": 100,
+            "color": "#EEEEEE",
+            "__typename": "HexColor"
+          },
+          "value": "Atairu first test",
+          "__typename": "Text"
+        },
+        {
           "size": "REGULAR",
           "color": null,
-          "value": "teste",
-          "type": "Text"
+          "value": "Some introduction text explaining the functions of the app",
+          "__typename": "Text"
         }
       ],
-      "type": "Card",
+      "__typename": "Card",
       "background": {
         "alpha": 52,
         "color": "#1f7572",
-        "type": "HexColor"
+        "__typename": "HexColor"
       }
     }
   ],
-  "type": "Screen"
+  "__typename": "Screen"
 }
