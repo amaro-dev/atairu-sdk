@@ -76,7 +76,7 @@ jobs:
         env:
           PUBLISH_USERNAME: ${{secrets.MAVEN_CENTRAL_USER}}
           PUBLISH_PASSWORD: ${{secrets.MAVEN_CENTRAL_TOKEN}}
-        run: ./gradlew -Dorg.gradle.internal.http.socketTimeout=300000 -Dorg.gradle.internal.http.connectionTimeout=300000 core:publish compose-ui:publish
+        run: ./gradlew -Dorg.gradle.internal.http.socketTimeout=300000 -Dorg.gradle.internal.http.connectionTimeout=300000 core:publish
 
       - name: Create a Release
         uses: actions/create-release@v1
