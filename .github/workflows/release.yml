@@ -59,11 +59,11 @@ jobs:
           SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
         run: |
-          printf "$CONTENT" | base64 --decode > ./library/private.key
-          gpg --batch --import ./library/private.key
-          echo "signing.keyId=$SIGNING_KEY_ID" >> ./library/local.properties
-          echo "signing.password=$SIGNING_PASSWORD" >> ./library/local.properties
-          echo "signing.secretKeyRingFile=./private.key" >> ./library/local.properties
+          printf "$CONTENT" | base64 --decode > ./private.key
+          gpg --batch --import ./private.key
+          echo "signing.keyId=$SIGNING_KEY_ID" >> ./local.properties
+          echo "signing.password=$SIGNING_PASSWORD" >> ./local.properties
+          echo "signing.secretKeyRingFile=./private.key" >> ./local.properties
 
       - name: Gradle Command
         uses: eskatos/gradle-command-action@v1
@@ -84,5 +84,5 @@ jobs:
       - name: Remove GPG file
         shell: bash
         run: |
-          rm -f ./library/signature.gpg
-          rm -f ./library/local.properties
+          rm -f ./signature.gpg
+          rm -f ./local.properties
