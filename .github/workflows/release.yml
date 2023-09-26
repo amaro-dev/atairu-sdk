@@ -37,7 +37,7 @@ jobs:
           releaseBranch=$(git rev-parse --abbrev-ref HEAD | sed 's/.*\-\(.*\)/\1/')
           commits=$(git rev-list --count refs/remotes/origin/main..$releaseBranch)
           echo "FIX_NUMBER=$commits" >> $GITHUB_ENV
-          echo "::set-output name=release_branch::$releaseBranch"
+          echo "release_branch=$releaseBranch" >> $GITHUB_OUTPUT
 
       - name: Get current library version
         id: manager
@@ -46,11 +46,11 @@ jobs:
           IFS='/' read -ra strarr <<< "${GITHUB_REF#refs/heads/}"
           version="${strarr[1]}".$FIX_NUMBER
           echo "VERSION_NAME=$version" >> $GITHUB_ENV
-          echo "::set-output name=version_name::$version"
+          echo "version_name=$version" >> $GITHUB_OUTPUT
 
       - name: Set library version to deploy
         shell: bash
-        run: sed -i -e 's/pom.version=[0-9]*.[0-9]*.[0-9]*/pom.version='${VERSION_NAME}'/g' ./library/gradle.properties
+        run: sed -i -e 's/pom.version=[0-9]*.[0-9]*.[0-9]*/pom.version='${VERSION_NAME}'/g' ./gradle.properties
 
       - name: Generate GPG Key file
         shell: bash
@@ -71,7 +71,7 @@ jobs:
           PUBLISH_USERNAME: ${{secrets.MAVEN_CENTRAL_USER}}
           PUBLISH_PASSWORD: ${{secrets.MAVEN_CENTRAL_TOKEN}}
         with:
-          arguments: "-Dorg.gradle.internal.http.socketTimeout=300000 -Dorg.gradle.internal.http.connectionTimeout=300000 library:publish"
+          arguments: "-Dorg.gradle.internal.http.socketTimeout=300000 -Dorg.gradle.internal.http.connectionTimeout=300000 core:publish compose-ui:publish"
 
       - name: Create a Release
         uses: actions/create-release@v1
