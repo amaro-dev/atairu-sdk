@@ -17,6 +17,6 @@ fun TextSize.toFontSize() = when (this) {
 fun AtairuColor?.toValue() =
     when (this) {
         is HexColor -> Color(color.substring(1).toLong(16) or 0xFF000000).copy(alpha = alpha / 100f)
-        is ThemeColor -> TODO()
+        is ThemeColor -> Color.White
         null -> Color.LightGray
     }

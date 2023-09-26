@@ -12,7 +12,7 @@ object AtairuCli {
     private val engine = AtairuEngine()
     fun start(settings: ClientSettings = ClientSettings()) {
         this.settings = settings
-        service = AtairuServerFeedService(settings.serviceAddress)
+        service = AtairuServerFeedService(settings.environment)
     }
 
     fun renderScreen(target: RenderingCanvas, screenId: String) {

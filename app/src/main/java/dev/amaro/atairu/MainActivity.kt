@@ -18,7 +18,6 @@ class MainActivity : ComponentActivity() {
         AtairuCli.start()
 
         setContent {
-
             Column {
                 Button(onClick = { refresh() }) {
                     Text("Refresh")
@@ -32,6 +31,6 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun refresh() {
-        AtairuCli.renderScreen(canvas, "")
+        AtairuCli.renderScreen(canvas, "clmqsbspv000014uziybbs82v")
     }
 }
